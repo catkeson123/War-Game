@@ -9,7 +9,7 @@ import random
 
 # In[2]:
 
-
+# stores the suits, ranks, and values of cards in arrays
 suits = ('Hearts', 'Diamonds', 'Spades', 'Clubs')
 ranks = ('Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace')
 values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8, 
@@ -18,7 +18,7 @@ values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8,
 
 # In[3]:
 
-
+# Card class
 class Card:
     
     def __init__(self,suit,rank):
@@ -32,7 +32,7 @@ class Card:
 
 # In[4]:
 
-
+# Deck Class
 class Deck:
     
     def __init__(self):
@@ -41,26 +41,29 @@ class Deck:
         for suit in suits:
             for rank in ranks:
                 self.cards.append(Card(suit,rank))
-        
+    # shuffle deck    
     def shuffle(self):
         random.shuffle(self.cards)
     
+    # deal a card from the deck
     def deal(self):
         return self.cards.pop()
 
 
 # In[5]:
 
-
+# Player Class
 class Player:
     
     def __init__(self,name):
         self.name = name
         self.cards = []
     
+    # remove a card from a players hand
     def remove_card(self):
         return self.cards.pop(0)
-    
+
+    # add a card to a players hand
     def add_cards(self,new_cards):
         if type(new_cards) == type([]):
             self.cards.extend(new_cards)
@@ -84,6 +87,7 @@ player2 = Player('Player 2')
 deck = Deck()
 deck.shuffle()
 
+# deal cards from the deck to players
 for x in range(26):
     player1.add_cards(deck.deal())
     player2.add_cards(deck.deal())
@@ -112,6 +116,7 @@ while game_on:
     
     at_war = True
     
+    # logic for being at war
     while at_war:
           
           if player1_cards[-1].value > player2_cards[-1].value:
@@ -137,11 +142,3 @@ while game_on:
                   for card in range(10):
                       player1_cards.append(player1.remove_card())
                       player2_cards.append(player2.remove_card())
-    
-
-
-# In[ ]:
-
-
-
-
